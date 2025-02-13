@@ -12,7 +12,7 @@ services:
 
 before_script:
   - docker --version
-  - docker info
+  
 
 build-job:       
   stage: build
