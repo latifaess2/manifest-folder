@@ -1,6 +1,10 @@
 
 stages:          
   - build
+  - docker
+variables:
+  DOCKER_IMAGE: latifaes2/hello-world-java
+
   
 build-job:       
   stage: build
@@ -12,5 +16,15 @@ build-job:
   artifacts:
      paths:
       - target/*.jar
+
+docker-build:
+  stage: docker
+  script:
+    
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+   
+    - docker build -t $DOCKER_IMAGE .
+    
+    - docker push $DOCKER_IMAGE
 
 
