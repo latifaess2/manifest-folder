@@ -3,7 +3,7 @@ stages:
   - build
   - test
 
-  
+image: openjdk:17 
 
 build-job:       
   stage: build
@@ -19,8 +19,6 @@ build-job:
 test:
   stage: test
   script:
-    - mvn clean test  # Exécute les tests unitaires et d'intégration
-  artifacts:
-    when: always
-    reports:
-      junit: target/surefire-reports/TEST-*.xml  # Sauvegarde les résultats des testsgg
+    - apt-get update && apt-get install -y maven  # Installe Maven
+    - mvn -version  # Vérifie l'installation
+    - mvn clean test  # Exécute les tests
