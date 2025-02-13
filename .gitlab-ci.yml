@@ -5,7 +5,10 @@ stages:
 variables:
   DOCKER_IMAGE: latifaes2/hello-world-java
 before_script:
-  # Installer Docker sur GitLab CI Runner
+  - apt-get update
+  - apt-get install -y apt-transport-https ca-certificates curl software-properties-common
+  - curl -fsSL https://get.docker.com -o get-docker.sh
+  - sh get-docker.sh
   - docker --version
   - docker info
   
