@@ -23,5 +23,4 @@ test:
   artifacts:
     when: always
     reports:
-      junit: target/surefire-reports/TEST-*.xml  # Sauvegarde les résultats des tests
-
+      junit: target/surefire-reports/TEST-*.xml  # Sauvegarde les résultats des testsgg
