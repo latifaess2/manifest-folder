@@ -4,7 +4,11 @@ stages:
   - docker
 variables:
   DOCKER_IMAGE: latifaes2/hello-world-java
-image: docker:20.10.7
+image: docker:20.10.7-dind
+
+services:
+  - docker:20.10.7-dind  # Service Docker pour DinD
+
 
 before_script:
   - docker --version
