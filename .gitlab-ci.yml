@@ -4,7 +4,10 @@ stages:
   - docker
 variables:
   DOCKER_IMAGE: latifaes2/hello-world-java
-
+before_script:
+  # Installer Docker sur GitLab CI Runner
+  - docker --version
+  - docker info
   
 build-job:       
   stage: build
