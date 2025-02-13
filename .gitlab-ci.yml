@@ -22,7 +22,11 @@ build-job:
       - target/*.jar
 
 docker-build:
-  stage: docker
+  stage: docker   
+  image: docker:latest
+  services:
+    - docker:dind
+
   script:
     
     - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
