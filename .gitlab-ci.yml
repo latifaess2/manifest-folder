@@ -2,6 +2,7 @@
 stages:          
   - build
   - test
+  - docker
 
 image: openjdk:17 
 
@@ -20,5 +21,11 @@ test:
   stage: test
   script:
     - echo "test le code "
+
+docker-build-push:
+  stage: docker
+  script:
+    - echo "build l'image docker "
+    - echo "push l'image dans dockerhub  "
 
   
