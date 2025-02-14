@@ -2,7 +2,7 @@
 stages:          
   - build
   - test
-  - docker
+  
 
 image: openjdk:17 
 
@@ -23,5 +23,5 @@ test:
   script:
     - mvn test
   dependencies:
-    - build
+    - build-job
   
