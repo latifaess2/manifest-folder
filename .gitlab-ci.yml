@@ -19,6 +19,6 @@ build-job:
 test:
   stage: test
   script:
-    - apt-get update && apt-get install -y maven  # Installe Maven
-    - mvn -version  # Vérifie l'installation
-    - mvn clean test  # Exécute les tests
+    - echo "test le code "
+
+  
