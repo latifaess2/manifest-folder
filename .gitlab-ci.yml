@@ -1,20 +1,17 @@
-
-stages:          
+stages:
   - build
   - test
-  
 
-image: openjdk:17 
+image: openjdk:17
 
-build-job:       
+build-job:  # Nom du job inchangé
   stage: build
   image: maven:3.9.0-eclipse-temurin-17
   script:
     - echo "Compiling the code..."
-
     - mvn clean package
   artifacts:
-     paths:
+    paths:
       - target/*.jar
 
 test:
@@ -23,5 +20,4 @@ test:
   script:
     - mvn test
   dependencies:
-    - build-job
-  
+    - build-job  # Maintenant, cela correspond au nom du job de build
