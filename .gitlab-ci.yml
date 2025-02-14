@@ -31,7 +31,8 @@ docker-build-push:
     IMAGE_TAG: latest  
   script:
     - echo "Logging into Docker Hub..."
-    - docker login -u "$DOCKER_USERNAME" -p "$DOCKER_PASSWORD"
+    - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+
     - echo "Building Docker image..."
     - docker build -t "$IMAGE_NAME:$IMAGE_TAG" .
     - echo "Pushing Docker image to Docker Hub..."
