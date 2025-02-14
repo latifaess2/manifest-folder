@@ -19,13 +19,9 @@ build-job:
 
 test:
   stage: test
+  image: maven:3.8.4-openjdk-11
   script:
-    - echo "test le code "
-
-docker-build-push:
-  stage: docker
-  script:
-    - echo "build l'image docker "
-    - echo "push l'image dans dockerhub  "
-
+    - mvn test
+  dependencies:
+    - build
   
