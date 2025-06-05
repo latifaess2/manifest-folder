@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: conversation-api-french
+  namespace: chatbot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: conversation-api-french
+  template:
+    metadata:
+      labels:
+        app: conversation-api-french
+    spec:
+      containers:
+        - name: api
+          image: latifaes2/rasa_french_chatbot-conversation_data_api
+          ports:
+            - containerPort: 7000
+          volumeMounts:
+            - name: api-data
+              mountPath: /app/data
+      volumes:
+        - name: api-data
+          persistentVolumeClaim:
+            claimName: conversation-api-pvc

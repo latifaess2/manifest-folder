@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rasa-router
+  namespace: chatbot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rasa-router
+  template:
+    metadata:
+      labels:
+        app: rasa-router
+    spec:
+      containers:
+        - name: router
+          image: latifaes2/router:latest
+          ports:
+            - containerPort: 8080
+          volumeMounts:
+            - name: router-config
+              mountPath: /app/config/router.json
+              subPath: router.json
+      volumes:
+        - name: router-config
+          configMap:
+            name: router-config

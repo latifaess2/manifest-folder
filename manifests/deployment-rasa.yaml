@@ -1,0 +1,54 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rasa-french
+  namespace: chatbot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rasa-french
+  template:
+    metadata:
+      labels:
+        app: rasa-french
+    spec:
+      containers:
+        - name: rasa
+          image: rasa/rasa:3.6.0
+          command: ["rasa"]  
+          args:
+            - "run"
+            - "--enable-api"
+            - "--cors"
+            - "*"
+            - "--debug"
+            - "-p"
+            - "5005"
+            - "--endpoints"
+            - "endpoints.yml"
+            - "--credentials"
+            - "credentials.yml"
+          ports:
+            - containerPort: 5005
+          env:
+            - name: RASA_MODEL
+              value: "/app/models"
+            - name: LOGGING_LEVEL
+              value: "DEBUG"
+          volumeMounts:
+            - name: models
+              mountPath: /app/models
+            - name: config
+              mountPath: /app/endpoints.yml
+              subPath: endpoints.yml
+            - name: config
+              mountPath: /app/credentials.yml
+              subPath: credentials.yml
+      volumes:
+        - name: models
+          persistentVolumeClaim:
+            claimName: models-pvc
+        - name: config
+          configMap:
+            name: rasa-config

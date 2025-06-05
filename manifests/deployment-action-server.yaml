@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: action-server-french
+  namespace: chatbot
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: action-server-french
+  template:
+    metadata:
+      labels:
+        app: action-server-french
+    spec:
+      containers:
+        - name: action-server
+          image: latifaes2/rasa_french_chatbot-action_server:latest
+          ports:
+            - containerPort: 5055
+          volumeMounts:
+            - name: actions
+              mountPath: /app/actions
+      volumes:
+        - name: actions
+          hostPath:
+            path: /home/docker/actions  # Chemin absolu sur Minikube
+            type: Directory

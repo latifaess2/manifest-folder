@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: rasa-config
+  namespace: chatbot
+data:
+  endpoints.yml: |
+    action_endpoint:
+      url: "http://action-server-service.chatbot.svc.cluster.local:5055/webhook"
+    tracker_store:
+      type: SQL
+      dialect: "sqlite"
+      url: "sqlite:///./rasa.db"
+  credentials.yml: |
+    rest:
+      
+    rasa:
+      url: "http://rasa-fr-service.chatbot.svc.cluster.local:5005/api"
